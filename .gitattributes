@@ -1,5 +1,5 @@
-*.nii filter=lfs diff=lfs merge=lfs -text
 *.nii.gz filter=lfs diff=lfs merge=lfs -text
+*.nii filter=lfs diff=lfs merge=lfs -text
 *.csv filter=lfs diff=lfs merge=lfs -text
 *.csv !text !filter !merge !diff
 output/subj_dfs/edge_per_subj.csv filter=lfs diff=lfs merge=lfs -text
