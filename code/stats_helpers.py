@@ -364,6 +364,48 @@ def get_brainsmashed_edge_correlation_p_val_coarse(mat_a,
 
     return r_emp, p_emp
 
+def get_edge_correlation_p_val_random_perm(mat_a, mat_b, n_perm=1000, test_type='two-tailed'):
+    """
+    Calculate the p-value for correlation between two matrices by randomly permuting nodes
+
+    Parameters:
+    - mat_a: numpy array, input matrix to permute 
+    - mat_b: numpy array, comparison matrix
+    - n_perm: number of permutations (default: 1000)
+    - test_type: str, 'lower', 'upper', or 'two-tailed' (default: 'two-tailed')
+
+    Returns:
+    - r_emp: float, empirical r value
+    - p_emp: float, spatial autocorrelation-preserving p value
+    """
+
+    # Calculate empirical correlation between upper triangles
+    triu_ind = np.triu_indices(mat_a.shape[0], k=1)
+    r_emp = spearmanr(mat_a[triu_ind], mat_b[triu_ind])[0]   
+
+    # Get null r distribution
+    null_r_list = []
+
+    for _ in range(n_perm):
+        perm_ind = np.random.permutation(mat_a.shape[0])
+
+        mat_a_perm = mat_a[:,perm_ind][perm_ind,:]
+
+        null_r_list.append(spearmanr(mat_a_perm[triu_ind], mat_b[triu_ind])[0])
+    
+    # Calculate empirical p-value based on test type
+    if test_type == 'two-tailed':
+        p_emp = np.mean(np.abs(null_r_list) >= abs(r_emp))
+    elif test_type == 'upper':
+        p_emp = np.mean(null_r_list >= r_emp)
+    elif test_type == 'lower':
+        p_emp = np.mean(null_r_list <= r_emp)
+    else:
+        raise ValueError("Invalid test_type. Choose 'two-tailed', 'upper', or 'lower'.")
+
+    return r_emp, p_emp
+
+
 def run_mlr(df, y, X):
     """
     Run a multiple linear regressions for each outcome (y) variable, output key values
