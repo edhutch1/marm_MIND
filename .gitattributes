@@ -1,7 +1,6 @@
-*.nii.gz filter=lfs diff=lfs merge=lfs -text
 *.nii filter=lfs diff=lfs merge=lfs -text
-*.csv filter=lfs diff=lfs merge=lfs -text
-*.csv !text !filter !merge !diff
+*.nii.gz filter=lfs diff=lfs merge=lfs -text
 output/subj_dfs/edge_per_subj.csv filter=lfs diff=lfs merge=lfs -text
 output/SF2-4/hist_opt_edge_per_subj.csv filter=lfs diff=lfs merge=lfs -text
 output/SF2-4/Average_T1wT2w_vox.csv filter=lfs diff=lfs merge=lfs -text
+*.csv !text !filter !merge !diff

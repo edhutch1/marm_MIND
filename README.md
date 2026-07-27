@@ -29,7 +29,7 @@ Jupyter notebooks contain marked-down code necessary to reproduce Main and Suppl
 - Fig5: T1w/T2w MIND network edges and nodal degrees predict age more accurately than regional mean T1w/T2w
 - Fig6: Sensory and association cortex show distinct age-related changes in myelination network properties
 - SF2-4: Comparing Histogram and k-NN estimators of KL divergence
-- SF7-: Supplementary analysis for Main Figures 2-6
+- SF8-: Supplementary analysis for Main Figures 2-6
 
 Notebooks utilise additional helper scripts in /code
 - MIND_helpers.py (from https://github.com/isebenius/MIND)
@@ -37,12 +37,15 @@ Notebooks utilise additional helper scripts in /code
 - preprocessing_helpers.py
 - stats_helpers.py
 - Sup_MIND_helpers.py
+- gams_SF11.R
 
 ## Data and pre-computed intermediate outputs
 
 Data necessary to run analyses are provided in /data, with the exception of larger datasets, namely T1-weighted and T2-weighted imaging (Hata et al. 2023: https://dataportal.brainminds.jp/marmoset-mri-na216) and single-nucleus RNA-sequencing data (Krienen et al. 2023: https://cellxgene.cziscience.com/collections/0fd39ad7-5d2d-41c2-bda0-c55bde614bdb). For convenience, intermediate outputs are provided so that these large datasets do not need to be downloaded. These intermediate outputs are:
 - Covariates in individual marmosets -> ```/output/subj_df/covariate_per_subj.csv```
-- Mean regional T1w/T2w in individual marmosets -> ```/output/subj_df/mean_t12_per_subj.csv```
+- Regional mean T1w/T2w in individual marmosets -> ```/output/subj_df/mean_t12_per_subj.csv```
+- Regional standard deviation in T1w/T2w in individual marmosets -> ```/output/subj_df/std_t12_per_subj.csv```
+- Regional skew in T1w/T2w in individual marmosets -> ```/output/subj_df/skew_t12_per_subj.csv```
 - Edges of T1w/T2w k-NN MIND networks in individual marmosets -> ```/output/subj_df/edge_per_subj.csv```
 - Degrees of T1w/T2w k-NN MIND networks in individual marmosets -> ```/output/subj_df/degree_per_subj.csv```
 - Edges of coarse T1w/T2w MIND networks in individual marmosets -> ```/output/subj_df/edge_per_subj_coarse.csv```

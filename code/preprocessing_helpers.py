@@ -113,3 +113,34 @@ def extract_voxels_coarse(img_file, parc_file, lut, bm_codes, pax_codes, coarse_
     vox['Label'] = vox[ROI] + '_' + vox[Side]
 
     return vox
+
+def calculate_mean_img(img_dir, img_filename_list, output_path):
+    """
+    Computes and saves mean image
+    Images should be in common space!
+
+    Parameters:
+    - img_dir: path to directory containing images in common space
+    - img_filename_list: list of filenames of images to average
+    - output_path: path to output nifti file
+    """
+
+    # Calculate mean image
+    img_data_list = []
+
+    for img_filename in tqdm(img_filename_list):
+        img = nib.load(os.path.join(img_dir, img_filename))
+        img_data = img.get_fdata()
+
+        img_data_list.append(img_data)
+    
+    img_stack = np.stack(img_data_list, axis=0)
+    img_mean = img_stack.mean(axis=0)
+
+    # Save to nifti
+    mean_img_nifti = nib.Nifti1Image(
+        img_mean,
+        affine=img.affine,
+        header=img.header
+    )
+    nib.save(mean_img_nifti, output_path)

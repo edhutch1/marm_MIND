@@ -327,7 +327,8 @@ def age_bin_correlations(df, age_bins, cbar_min):
 
     # ----- Cross-correlate ----- #
 
-    bin_corrs = np.corrcoef(bin_mean_networks)
+    #bin_corrs = np.corrcoef(bin_mean_networks)
+    bin_corrs = pd.DataFrame(bin_mean_networks).T.corr().values
 
 
     # ----- Plot ----- #
